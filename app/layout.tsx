@@ -28,6 +28,7 @@ export default function RootLayout({ children }: Props) {
               />
             </header>
 
+            <h1 className="text-3xl font-bold underline">Hello world!</h1>
             <main className={styles.main}>{children}</main>
 
             <footer className={styles.footer}>
