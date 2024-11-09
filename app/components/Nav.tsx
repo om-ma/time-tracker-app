@@ -32,6 +32,14 @@ export const Nav = () => {
       >
         Quotes
       </Link>
+      <Link
+        className={`${styles.link} ${
+          pathname === "/tickets" ? styles.active : ""
+        }`}
+        href="/tickets"
+      >
+        Tickets
+      </Link>
     </nav>
   );
 };
