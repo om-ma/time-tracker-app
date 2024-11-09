@@ -13,7 +13,7 @@ const Ticket = () => {
           <TicketTimeTracker tickets={tickets} />
           </div>
             <div className='bg-[#EFEFF0] rounded-xl w-[40%] px-14 py-8 mt-4'>
-              <h1 className='text-2xl font-semibold text-center'> Select a existing ticket to log time <br /> or <br /><span className='underline underline-offset-2'>Create a new one</span> </h1> 
+              <h1 className='text-xl font-semibold text-center'> Select a existing ticket to log time <br /> or <br /><span className='underline underline-offset-2'>Create a new one</span> </h1> 
               <div className='pt-20'>
                      <span className='mr-2 bg-[#D9D9D9] h-10 w-[100%]  inline-block'></span>
                      <span className='mr-2 bg-[#D9D9D9] h-10 w-[100%]  inline-block mt-10'></span> 

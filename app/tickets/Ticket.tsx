@@ -22,7 +22,7 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
 <line opacity="0.6" x1="1.23338" y1="0.443604" x2="1.23337" y2="285.451" stroke="url(#paint0_linear_3_12)" strokeOpacity="0.6" strokeWidth="0.896445"/>
 <defs>
 <linearGradient id="paint0_linear_3_12" x1="0.285156" y1="0.443603" x2="0.285146" y2="225.451" gradientUnits="userSpaceOnUse">
-<stop stop-opacity="0.2"/>
+<stop stopOpacity="0.2"/>
 <stop offset="1"/>
 </linearGradient>
 </defs>
