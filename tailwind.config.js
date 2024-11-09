@@ -26,7 +26,7 @@ module.exports = {
             left: '0',
             width: '100%',
             height: '1px', // Adjust thickness as needed
-            background: 'linear-gradient(to right, #c9c9c9, #e9e9e9)',
+            background: 'linear-gradient(to right, #00000099,#0000000F)',
           },
         },
       });

@@ -20,10 +20,15 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
 
         {/* Ticket Rows */}
         {tickets.map((ticket) => (
-          <div key={ticket.id} className="grid grid-cols-2 gap-4 items-center gradient-border-b  py-2">
+          <div key={ticket.id} className="grid grid-cols-2 gap-4 items-center gradient-border-b  py-4">
             {/* Left Column - Ticket Info */}
             <div className="flex items-center border-r pr-4">
-              <span className="mr-2 bg-green-500 h-4 w-4 rounded-full inline-block"></span>
+              <span className="mr-2">
+                <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.792969" y="0.304443" width="21.5147" height="21.5147" rx="3.58578" fill="#1E8826"/>
+                    <circle cx="11.5501" cy="11.0618" r="4.48223" fill="white"/>
+                 </svg>
+               </span>
               <span className="font-medium">{ticket.id}</span>
               <span className="ml-2 text-gray-600 truncate">{ticket.title}</span>
             </div>
@@ -31,7 +36,7 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
             {/* Right Column - Time Logged */}
             <div className="">
               <span>{ticket.timeLogged}</span>
-              <a href="#" className="underline ml-2 text-blue-500 hover:text-blue-700">
+              <a href="#" className="underline ml-2  ">
                 Log time
               </a>
             </div>
