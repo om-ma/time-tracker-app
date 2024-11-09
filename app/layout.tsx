@@ -14,21 +14,13 @@ export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
       <html lang="en">
-        <body>
+        <body><Nav />
           <section className={styles.container}>
-            <Nav />
+            
 
-            <header className={styles.header}>
-              <Image
-                src="/logo.svg"
-                className={styles.logo}
-                alt="logo"
-                width={100}
-                height={100}
-              />
-            </header>
+             
 
-            <h1 className="text-3xl font-bold underline">Hello world!</h1>
+             
             <main className={styles.main}>{children}</main>
 
             <footer className={styles.footer}>

@@ -32,12 +32,12 @@ export const Nav = () => {
       >
         Quotes
       </Link>
-      <Link
+      {/* <Link
         className={`${styles.link} ${
-          pathname === "/tickets" ? styles.active : ""
+          pathname === "../../tickets" ? styles.active : ""
         }`}
         href="/tickets"
-      >Tickets</Link>
+      >Tickets</Link> */}
     </nav>
   );
 };

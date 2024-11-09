@@ -9,7 +9,31 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+       
+       
+    },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.gradient-border-b': {
+          position: 'relative',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: '0',
+            left: '0',
+            width: '100%',
+            height: '1px', // Adjust thickness as needed
+            background: 'linear-gradient(to right, #c9c9c9, #e9e9e9)',
+          },
+        },
+      });
+    },
+  ],
 };
+ 
+
+ 
+ 
