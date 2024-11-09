@@ -11,7 +11,10 @@ module.exports = {
   theme: {
     extend: {
        
-       
+      fontFamily: {
+        DM: ["DM Mono", "serif"],
+        
+      },
     },
   },
   plugins: [
@@ -25,7 +28,7 @@ module.exports = {
             bottom: '0',
             left: '0',
             width: '100%',
-            height: '1px', // Adjust thickness as needed
+            height: '0.9px', // Adjust thickness as needed
             background: 'linear-gradient(to right, #00000099,#0000000F)',
           },
         },
