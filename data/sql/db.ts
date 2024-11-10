@@ -15,6 +15,7 @@ export class SqlDb {
         entities: [
             m.TicketsModel,
         ],
+        migrations: [__dirname + '/migrations/*.ts']
     };
 
     constructor(args: { entities: ObjectType<any>[]; connectionName: string }) {
@@ -62,4 +63,4 @@ export class SqlDb {
 
 // Exporting the DataSource instance for TypeORM migrations
 export const DbDataSource = new DataSource(SqlDb.dataSourceOptions);
-
+// module.exports = new DataSource(SqlDb.dataSourceOptions);

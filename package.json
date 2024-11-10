@@ -6,18 +6,24 @@
     "start": "next start",
     "db:setup": "yarn db:create:dev && yarn db:create:test",
     "db:create:dev": "createdb --owner=postgres next_now_dev",
+    "g:entity": "yarn typeorm:local entity:create",
     "db:create:test": "createdb --owner=postgres next_now_test",
-    "g:migration": "yarn typeorm:local migration:generate -n",
-    "g:entity": "yarn typeorm:local entity:create -n",
-    "typeorm:local": "yarn local ./node_modules/typeorm/cli.js"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "db:generate": "yarn typeorm:local migration:generate -d ./data/sql/db.ts",
+    "db:create": "typeorm-ts-node-commonjs migration:create",
+    "db:migrate": "yarn typeorm:local migration:run -d data/sql/db.ts",
+    "typeorm:local": "yarn local ./node_modules/typeorm/cli.js",
+    "local": "DOTENV_CONFIG_PATH=./.env ts-node -P ./tsconfig.yarn.json -r dotenv/config"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
+    "dotenv": "^16.4.5",
     "next": "latest",
     "pg": "^8.13.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.0",
+    "reflect-metadata": "^0.2.2",
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
@@ -28,6 +34,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
+    "ts-node": "10.9.1",
     "typescript": "^5.3.3"
   }
 }
