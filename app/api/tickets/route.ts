@@ -1,11 +1,9 @@
 // pages/api/tickets.ts
 
 import { NextApiRequest, NextApiResponse } from 'next';
-import {AppDataSource} from '../../../lib/typeorm';
-import { Ticket } from '../../../lib/entities/Ticket';
+import { TicketsModel } from '../../../lib/entities/tickets_model';
 import { NextRequest, NextResponse } from 'next/server';
-
-
+import { SqlDb } from '@/data/sql';
 
 interface GetTicketsQuery {
   page?: string;
@@ -21,7 +19,7 @@ interface Pagination {
 }
 
 type GetTicketsResponse = {
-  data: Ticket[];
+  data: TicketsModel[];
   pagination: Pagination;
 };
 
@@ -29,123 +27,100 @@ type ErrorResponse = {
   error: string;
 };
 
-// Initialize the database connection on each request
-async function getConnection() {
-  if (!AppDataSource.isInitialized) {
-    await AppDataSource.initialize();
-  }
-  return AppDataSource.getRepository(Ticket);
-}
-
-
-// Create Ticket (POST)
-export async function POST(req: NextRequest, res: NextApiResponse<Ticket | ErrorResponse>) {
-  const { type, summary, detail, hours, timer, notes }: Ticket = await req.json();
-  console.log('req', req.body)
-
-  if (!type || !summary || !detail || !hours) {
-    return NextResponse.json({ error: 'Missing required fields' });
-  }
-
-  try {
-    const ticketRepository = await getConnection();
-    const ticket = new Ticket();
-    ticket.type = type;
-    ticket.summary = summary;
-    ticket.detail = detail;
-    ticket.hours = hours;
-    ticket.timer = timer ?? null;
-    ticket.notes = notes ?? null;
-
-    const savedTicket = await ticketRepository.save(ticket);
-    return NextResponse.json(savedTicket); // Return the newly created ticket
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
-  }
-}
-
 // Get Tickets (GET) with Pagination and Search
 export async function GET(req: NextRequest, res: NextApiResponse<GetTicketsResponse | ErrorResponse>) {
 
-
-  const params = req.nextUrl?.searchParams;
-
-  const ticket_id = params.get('ticketId')
-
-  if (!ticket_id || Array.isArray(ticket_id)) {
-    return res.status(400).json({ error: 'Ticket ID is required and must be a single value.' });
-  }
-
   try {
-    const ticketRepository = await getConnection();
+    const ticketsRepo = await SqlDb.getRepository(TicketsModel);
+    const tickets = await ticketsRepo.find();
 
-    const ticket = await ticketRepository.findOne({ where: { ticket_id: parseInt(ticket_id) } });
-
-    if (!ticket) {
-      return NextResponse.json({error: 'Ticket not found' });
-    }
-
-    return  NextResponse.json(ticket); // Return the ticket data
+    return NextResponse.json(tickets); // Return the ticket data
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Internal Server Error' });
   }
 }
 
-// Update Ticket (PATCH)
-export async function PATCH(req: NextRequest, res: NextApiResponse<Ticket | ErrorResponse>) {
-  const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<Ticket> = await req.json();
+// // Create Ticket (POST)
+// export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
+//   const { type, summary, detail, hours, timer, notes }: TicketsModel = await req.json();
+//   console.log('req', req.body)
 
-  if (!ticket_id) {
-    return NextResponse.json({ error: 'Ticket ID is required' });
-  }
+//   if (!type || !summary || !detail || !hours) {
+//     return NextResponse.json({ error: 'Missing required fields' });
+//   }
 
-  try {
-    const ticketRepository = await getConnection();
-    const ticket = await ticketRepository.findOne({ where: { ticket_id } });
+//   try {
+//     const ticketRepository = await getConnection();
+//     const ticket = new TicketsModel();
+//     ticket.type = type;
+//     ticket.summary = summary;
+//     ticket.detail = detail;
+//     ticket.hours = hours;
+//     ticket.timer = timer ?? null;
+//     ticket.notes = notes ?? null;
 
-    if (!ticket) {
-      return NextResponse.json({ error: 'Ticket not found' });
-    }
+//     const savedTicket = await ticketRepository.save(ticket);
+//     return NextResponse.json(savedTicket); // Return the newly created ticket
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ error: 'Internal Server Error' });
+//   }
+// }
 
-    if (type) ticket.type = type;
-    if (summary) ticket.summary = summary;
-    if (detail) ticket.detail = detail;
-    if (hours) ticket.hours = hours;
-    if (timer) ticket.timer = timer;
-    if (notes) ticket.notes = notes;
+// // Update Ticket (PATCH)
+// export async function PATCH(req: NextRequest, res: NextApiResponse<Ticket | ErrorResponse>) {
+//   const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<Ticket> = await req.json();
 
-    const updatedTicket = await ticketRepository.save(ticket);
-    return NextResponse.json(updatedTicket);
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({error: 'Internal Server Error' });
-  }
-}
+//   if (!ticket_id) {
+//     return NextResponse.json({ error: 'Ticket ID is required' });
+//   }
 
-// Delete Ticket (DELETE)
-export async function DELETE(req: NextRequest, res: NextApiResponse<ErrorResponse>) {
-  const { ticket_id }: { ticket_id: number } = await req.json();
+//   try {
+//     const ticketRepository = await getConnection();
+//     const ticket = await ticketRepository.findOne({ where: { ticket_id } });
 
-  console.log('ssijsijisjjisijs')
+//     if (!ticket) {
+//       return NextResponse.json({ error: 'Ticket not found' });
+//     }
 
-  if (!ticket_id) {
-    return NextResponse.json({ error: 'Ticket ID is required' });
-  }
+//     if (type) ticket.type = type;
+//     if (summary) ticket.summary = summary;
+//     if (detail) ticket.detail = detail;
+//     if (hours) ticket.hours = hours;
+//     if (timer) ticket.timer = timer;
+//     if (notes) ticket.notes = notes;
 
-  try {
-    const ticketRepository = await getConnection();
-    const ticket = await ticketRepository.findOne({ where: { ticket_id } });
+//     const updatedTicket = await ticketRepository.save(ticket);
+//     return NextResponse.json(updatedTicket);
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ error: 'Internal Server Error' });
+//   }
+// }
 
-    if (!ticket) {
-      return NextResponse.json({ error: 'Ticket not found' });
-    }
+// // Delete Ticket (DELETE)
+// export async function DELETE(req: NextRequest, res: NextApiResponse<ErrorResponse>) {
+//   const { ticket_id }: { ticket_id: number } = await req.json();
 
-    await ticketRepository.remove(ticket);
-    return NextResponse.json({ sucess: true }); // success
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
-  }
-}
+//   console.log('ssijsijisjjisijs')
+
+//   if (!ticket_id) {
+//     return NextResponse.json({ error: 'Ticket ID is required' });
+//   }
+
+//   try {
+//     const ticketRepository = await getConnection();
+//     const ticket = await ticketRepository.findOne({ where: { ticket_id } });
+
+//     if (!ticket) {
+//       return NextResponse.json({ error: 'Ticket not found' });
+//     }
+
+//     await ticketRepository.remove(ticket);
+//     return NextResponse.json({ sucess: true }); // success
+//   } catch (error) {
+//     console.error(error);
+//     return NextResponse.json({ error: 'Internal Server Error' });
+//   }
+// }
