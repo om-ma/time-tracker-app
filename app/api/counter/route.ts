@@ -14,3 +14,11 @@ export async function POST(request: NextRequest, context: Context) {
 
   return NextResponse.json({ data: amount });
 }
+
+
+export async function GET(request: NextRequest, context: Context) {
+  // simulate IO latency
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  return NextResponse.json({ data: 0 });
+}
