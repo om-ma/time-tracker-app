@@ -12,6 +12,7 @@ export class SqlDb {
         // username: SQL_USER,
         // password: SQL_PASSWORD,
         database: 'time_traker',
+        synchronize: true,
         entities: [
             m.TicketsModel,
         ],

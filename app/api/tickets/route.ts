@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { TicketsModel } from '../../../lib/entities/tickets_model';
 import { NextRequest, NextResponse } from 'next/server';
 import { SqlDb } from '@/data/sql';
+import { ErrorEnum, ErrorMap } from '@/app/utils/commons';
+import { ErrorHandler } from '@/app/utils/errorhandler';
 
 interface GetTicketsQuery {
   page?: string;
@@ -29,15 +31,53 @@ type ErrorResponse = {
 
 // Get Tickets (GET) with Pagination and Search
 export async function GET(req: NextRequest, res: NextApiResponse<GetTicketsResponse | ErrorResponse>) {
-
   try {
-    const ticketsRepo = await SqlDb.getRepository(TicketsModel);
-    const tickets = await ticketsRepo.find();
+    // Extract pagination parameters from the query (if present)
+    const params = req.nextUrl?.searchParams;
+    const pageNumber = params.get('page') ? Number(params.get('page')) : null;
+    const pageLimit = params.get('limit') ? Number(params.get('limit')) : null;
 
-    return NextResponse.json(tickets); // Return the ticket data
-  } catch (error) {
+    // If pagination parameters are provided and are valid
+    if (pageNumber && pageLimit) {
+      // Ensure the page number and limit are positive integers
+      if (pageNumber <= 0 || pageLimit <= 0) {
+        return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
+      }
+
+      // Get the repository and count total tickets for paginated query
+      const ticketsRepo = await SqlDb.getRepository(TicketsModel);
+
+      // Fetch the paginated tickets along with the total count of records
+      const [tickets, totalItems] = await ticketsRepo.findAndCount({
+        take: pageLimit,
+        skip: (pageNumber - 1) * pageLimit,
+      });
+
+      // Calculate pagination metadata
+      const totalPages = Math.ceil(totalItems / pageLimit);
+
+      // Return paginated data
+      return NextResponse.json({
+        tickets,
+        pagination: {
+          totalItems,
+          totalPages,
+          currentPage: pageNumber,
+          limit: pageLimit,
+        },
+      });
+    } else {
+      // No pagination params - fetch all tickets
+      const ticketsRepo = await SqlDb.getRepository(TicketsModel);
+      const tickets = await ticketsRepo.find(); // Fetch all records without pagination
+
+      return NextResponse.json({
+        tickets, // No pagination metadata needed
+      });
+    }
+  } catch (error:any) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
+    return ErrorHandler(ErrorMap(error.code));
   }
 }
 
@@ -47,11 +87,12 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
   console.log('req', req.body)
 
   if (!type || !summary || !detail || !hours) {
-    return NextResponse.json({ error: 'Missing required fields' });
+    return  ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
+    ;
   }
 
   try {
-    const ticketRepository = await getConnection();
+    const ticketRepository =  await SqlDb.getRepository(TicketsModel);;
     const ticket = new TicketsModel();
     ticket.type = type;
     ticket.summary = summary;
@@ -64,23 +105,26 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
     return NextResponse.json(savedTicket); // Return the newly created ticket
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
+    return ErrorHandler(ErrorMap(ErrorEnum.INTERNAL_ERROR));
   }
 }
 
 // Update Ticket (PATCH)
-export async function PATCH(req: NextRequest, res: NextApiResponse<Ticket | ErrorResponse>) {
+export async function PATCH(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
   const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<Ticket> = await req.json();
 
+  const ticketRepository = await SqlDb.getRepository(TicketsModel);
+
   if (!ticket_id) {
-    return NextResponse.json({ error: 'Ticket ID is required' });
+    throw ErrorMap(ErrorEnum.CUSTOM_ERROR);
   }
 
   try {
     const ticket = await ticketRepository.findOne({ where: { ticket_id } });
 
     if (!ticket) {
-      return NextResponse.json({ error: 'Ticket not found' });
+      throw ErrorMap(ErrorEnum.CUSTOM_ERROR);
+
     }
 
     if (type) ticket.type = type;
@@ -94,7 +138,7 @@ export async function PATCH(req: NextRequest, res: NextApiResponse<Ticket | Erro
     return NextResponse.json(updatedTicket);
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
+    throw ErrorMap(ErrorEnum.INTERNAL_ERROR);
   }
 }
 
@@ -102,24 +146,22 @@ export async function PATCH(req: NextRequest, res: NextApiResponse<Ticket | Erro
 export async function DELETE(req: NextRequest, res: NextApiResponse<ErrorResponse>) {
   const { ticket_id }: { ticket_id: number } = await req.json();
 
-  console.log('ssijsijisjjisijs')
-
   if (!ticket_id) {
-    return NextResponse.json({ error: 'Ticket ID is required' });
+    return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
   }
 
   try {
-    const ticketRepository = await getConnection();
+    const ticketRepository =  await SqlDb.getRepository(TicketsModel);
     const ticket = await ticketRepository.findOne({ where: { ticket_id } });
 
     if (!ticket) {
-      return NextResponse.json({ error: 'Ticket not found' });
+      return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
     }
 
     await ticketRepository.remove(ticket);
     return NextResponse.json({ sucess: true }); // success
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
+    return ErrorHandler(ErrorMap(ErrorEnum.INTERNAL_ERROR));
   }
 }
