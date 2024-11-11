@@ -72,7 +72,7 @@ export async function GET(req: NextRequest, res: NextApiResponse<GetTicketsRespo
       const tickets = await ticketsRepo.find(); // Fetch all records without pagination
 
       return NextResponse.json({
-        tickets, // No pagination metadata needed
+        ticket:tickets, // No pagination metadata needed
       });
     }
   } catch (error:any) {
@@ -98,8 +98,8 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
     ticket.summary = summary;
     ticket.detail = detail;
     ticket.hours = hours;
-    ticket.timer = timer ?? null;
-    ticket.notes = notes ?? null;
+    ticket.timer = timer ?? "0";
+    ticket.notes = notes ?? "";
 
     const savedTicket = await ticketRepository.save(ticket);
     return NextResponse.json(savedTicket); // Return the newly created ticket

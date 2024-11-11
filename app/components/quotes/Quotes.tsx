@@ -11,6 +11,9 @@ export const Quotes = () => {
   const { data, isError, isLoading, isSuccess } =
     useGetQuotesQuery(numberOfQuotes);
 
+    console.log('data', data, isError, isSuccess, isLoading)
+
+
   if (isError) {
     return (
       <div>
