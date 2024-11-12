@@ -54,6 +54,12 @@ This project is structured with performance, maintainability, and cutting-edge p
 
 ### Frontend Components
 
+- **Tickets Table with Reusable Rows**:
+  - The tickets table is built with each row as a separate component to promote modularity and ease of maintenance.
+
+- **Hours Formatting Component**:
+  - Hours formatting is managed by a dedicated component, making it easy to reuse across the application wherever time formatting is required.
+
 - **Timer Component Structure**:
   - The `Timer` functionality is split into smaller, reusable components:
     - `baseTimer`
