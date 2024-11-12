@@ -56,7 +56,7 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
     }
 
     return () => clearInterval(timerRef.current!);
-  }, [isActive, minutes, seconds, tickFunction]);
+  }, [isActive, hours, minutes, seconds, tickFunction]);
 
   useEffect(() => {
     localStorage.setItem("timer", JSON.stringify({ hours, minutes, seconds }));
@@ -78,20 +78,47 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
     localStorage.removeItem("timer");
   };
 
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    unit: "hours" | "minutes" | "seconds"
+  ) => {
+    const value = Math.max(0, parseInt(e.target.value) || 0);
+    if (unit === "hours") setHours(value);
+    if (unit === "minutes") setMinutes(Math.min(value, 59));
+    if (unit === "seconds") setSeconds(Math.min(value, 59));
+  };
+
   return (
     <div className="border-b pb-[37px]">
       <div className="flex items-center justify-center gap-3">
-        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]">
-          {String(hours).padStart(2, "0")}
-        </div>
+        <input
+          type="number"
+          value={String(hours).padStart(2, "0")}
+          onChange={(e) => handleInputChange(e, "hours")}
+          className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] w-[100px] h-[90px] rounded-[4px] text-center"
+          min="0"
+          disabled={isActive}
+        />
         <div>:</div>
-        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]">
-          {String(minutes).padStart(2, "0")}
-        </div>
+        <input
+          type="number"
+          value={String(minutes).padStart(2, "0")}
+          onChange={(e) => handleInputChange(e, "minutes")}
+          className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] w-[100px] h-[90px] rounded-[4px] text-center"
+          min="0"
+          max="59"
+          disabled={isActive}
+        />
         <div>:</div>
-        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]">
-          {String(seconds).padStart(2, "0")}
-        </div>
+        <input
+          type="number"
+          value={String(seconds).padStart(2, "0")}
+          onChange={(e) => handleInputChange(e, "seconds")}
+          className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] w-[100px] h-[90px] rounded-[4px] text-center"
+          min="0"
+          max="59"
+          disabled={isActive}
+        />
       </div>
       <div className="flex justify-center items-center gap-14 mt-[40px]">
         <button
