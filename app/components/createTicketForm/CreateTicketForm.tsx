@@ -34,16 +34,15 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-4">Create new ticket</h2>
-
+    <div className="py-[39px] w-full lg:w-[454px] mx-auto px-[55px] mb-12 lg:mb-0 bg-white rounded-[10px] border">
+      <h2 className="dm-mono text-xl font-medium mb-3">Create new ticket</h2>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <label className="block">
-          <span className="text-sm font-medium text-gray-700">Ticket type</span>
-          <div className="mt-1 relative">
+          <div className="mt-4 relative">
+          <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Ticket type</span>
             <select
               name="type" // Make sure to give the select a name
-              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none"
+              className="w-full p-2.5 dm-mono bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="Story">Story</option>
               <option value="Bug">Bug</option>
@@ -54,49 +53,55 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
 
         {/* Summary */}
         <label className="block">
-          <span className="text-sm font-medium text-gray-700">Summary</span>
-          <input
-            type="text"
-            name="summary"
-            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Summary"
-          />
+          <div className="mt-3 relative">
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Summary</span>
+            <input
+              type="text"
+              name="summary"
+              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder=""
+              />
+          </div>
         </label>
 
         {/* Details */}
         <label className="block">
-          <span className="text-sm font-medium text-gray-700">Details</span>
+        <div className="mt-3 relative">
+          <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Details</span>
           <textarea
             name="detail"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             rows={4}
-            placeholder="Details"
+            placeholder=""
           ></textarea>
+          </div>
         </label>
 
         {/* Hours */}
         <label className="block">
-          <span className="text-sm font-medium text-gray-700">Hours</span>
-          <input
-            type="number"
-            step="0.01"
-            name="hours"
-            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="0.00"
-          />
+          <div className="mt-3 relative">
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Hours</span>
+            <input
+              type="number"
+              step="0.01"
+              name="hours"
+              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="0.00"
+            />
+          </div>
         </label>
 
-        <div className="flex space-x-2">
+        <div className="pt-8">
           <button
             type="submit" // This triggers the onSubmit handler
-            className="w-full py-2.5 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full dm-mono py-[14px] bg-[#2EA8C3] text-dark rounded-[4px]"
           >
             Save Ticket
           </button>
           <button
             onClick={onCancelHandler}
             type="button" // This is a regular button that doesn't trigger form submission
-            className="w-full py-2.5 bg-white text-blue-500 font-semibold border border-blue-500 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full dm-mono py-[14px] bg-transparent text-[#2EA8C3] mt-3 border border-[#2EA8C3] rounded-[4px]"
           >
             Cancel
           </button>

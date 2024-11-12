@@ -2,7 +2,7 @@ import { CreateTicketForm } from "../../components/createTicketForm/CreateTicket
 
 export default async function Page() {
   return (
-    <div>
+    <div className="">
       <CreateTicketForm onCancelRoute="/tickets" />
     </div>
   );
