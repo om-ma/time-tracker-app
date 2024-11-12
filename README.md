@@ -3,12 +3,18 @@
 ### Prerequisites
 
 - **PostgreSQL**: Ensure you have PostgreSQL running locally as the application depends on a local PostgreSQL instance.
+- **Node Version Manager (nvm)**: 
+  - If you don’t have `nvm` installed, you can follow this guide to install it: [Install nvm](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/).
+  - Alternatively, if you already have Node.js 21 installed, you can skip this step.
 
 ### Setup Instructions
 
 1. **Install Node.js Version**:
-   - Use Node.js version 21.
-   - Run:
+   - Use Node.js version 21. If it's not already installed, run:
+     ```bash
+     nvm install 21
+     ```
+   - Then set the Node version to 21:
      ```bash
      nvm use 21
      ```
@@ -75,11 +81,6 @@ This project is structured with performance, maintainability, and cutting-edge p
 
 - **Small Component Architecture**:
   - The codebase is organized into small, focused components. This makes the code easier to maintain, read, and test, ensuring future scalability.
-
-### Infrastructure
-
-- **Terraform for Infrastructure as Code**:
-  - The project uses [Terraform](https://www.terraform.io/) to manage AWS infrastructure. Terraform enables us to define and provision cloud resources efficiently, improving scalability, maintainability, and deployment consistency.
 
 ## Contributing
 
