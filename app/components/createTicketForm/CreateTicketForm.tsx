@@ -66,6 +66,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
               name="summary"
               className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder=""
+              required
             />
           </div>
         </label>
@@ -81,6 +82,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
               className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               rows={4}
               placeholder=""
+              required
             ></textarea>
           </div>
         </label>
