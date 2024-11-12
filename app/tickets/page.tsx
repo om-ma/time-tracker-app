@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function TicketssPage() {
   return (
     <>
-      <div className="bg-Neutral-100 p-[31px] h-[637px]">
+      <div className="bg-gray-100 rounded-[10px] p-[31px] h-[637px]">
         <div className="">
           <h2 className="text-base font-medium text-center dm-mono">
             Select an existing ticket to log time

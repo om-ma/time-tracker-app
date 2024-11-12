@@ -10,7 +10,7 @@ export const TicketListingTable = () => {
   return (
     <>
       {isSuccess ? (
-        <table className="w-full w-3/4 text-left bg-white">
+        <table className="w-full lg:w-3/4 text-left bg-white">
           <thead className="bg-white">
             <tr>
               <th className="dm-mono font-medium text-[13.02px] pb-[15.14px]">
