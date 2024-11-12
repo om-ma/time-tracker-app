@@ -13,9 +13,7 @@ export default function Layout({ children }: { children: any }) {
           <div className="overflow-x-auto"></div>
           <TicketListingTable />
         </div>
-        <div className="w-full lg:w-1/3 mt-[70px]">
-          {children}
-        </div>
+        <div className="w-full lg:w-1/3 mt-[70px]">{children}</div>
       </div>
     </div>
   );

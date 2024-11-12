@@ -7,12 +7,6 @@ import { SqlDb } from '@/data/sql';
 import { ErrorEnum, ErrorMap } from '@/app/utils/commons';
 import { ErrorHandler } from '@/app/utils/errorhandler';
 
-interface GetTicketsQuery {
-  page?: string;
-  limit?: string;
-  search?: string;
-}
-
 interface Pagination {
   page: number;
   totalPages: number;
