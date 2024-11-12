@@ -1,9 +1,9 @@
-import { Entity, PrimaryColumn, Column, BeforeInsert } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
 export class TicketsModel {
-  @PrimaryColumn({ type: 'varchar', length: 50 })
-  ticket_id!: string;
+  @PrimaryGeneratedColumn()
+  ticket_id!: number;
 
   @Column({ type: 'varchar', length: 50 })
   type!: string;
@@ -21,13 +21,5 @@ export class TicketsModel {
   timer: string | null | undefined;
 
   @Column({ type: 'text', nullable: true })
-  notes: string | null | undefined; // Nullable field (to match the table's schema)
-
-  // Hook to generate the custom ticket_id in the format TECH-<ID>
-  @BeforeInsert()
-  setTicketId() {
-    if (!this.ticket_id) {
-      this.ticket_id = `TECH-${Math.floor(Math.random() * 10000)}`;
-    }
-  }
+  notes: string | null | undefined;
 }
