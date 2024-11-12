@@ -21,14 +21,19 @@ interface TicketApiResponse {
 
 // Define the API slice with endpoints for GET, POST, PUT, DELETE
 export const ticketApiSlice = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/api/tickets" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/api/" }),
   reducerPath: "ticketApi",
   tagTypes: ["Tickets"],  // Used for caching and invalidation
   endpoints: (build) => ({
     // GET: Fetch a list of tickets
     getTickets: build.query<TicketApiResponse, number>({
-      query: (limit = 100) => `?limit=${limit}`,  // Query string with limit
+      query: (limit = 100) => `tickets?limit=${limit}`,  // Query string with limit
       providesTags: () => [{ type: "Tickets", id: "LIST" }],  // Cache for list of tickets
+    }),
+
+    getTicket: build.query<any, string>({
+      query: (id) => `tickets/get_single_ticket?id=${id}`,
+      providesTags: (result, error, id) => [{ type: "Tickets", id }],
     }),
 
     // POST: Create a new ticket
@@ -69,6 +74,7 @@ export const ticketApiSlice = createApi({
 // Auto-generated hooks for use in components
 export const {
   useGetTicketsQuery,
+  useGetTicketQuery,
   useCreateTicketMutation,
   useUpdateTicketMutation,
   useDeleteTicketMutation,

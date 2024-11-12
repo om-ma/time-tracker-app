@@ -9,7 +9,7 @@ export default async function Page({
 
   return (
     <div>
-      <Timer onCancelRoute="/tickets" />
+      <Timer onCancelRoute="/tickets" ticketId={id} />
     </div>
   );
 }

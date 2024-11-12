@@ -1,7 +1,7 @@
 import { TicketListingTable } from "../components/ticketListingTable/TicketListingTable";
 export default function Layout({ children }: { children: any }) {
   return (
-    <div className="min-h-screen bg-gray-200 p-6">
+    <div className="min-h-screen bg-gray-200">
       <header className="bg-gray-800 text-purple-200 text-center py-4 mb-6">
         <h1 className="text-xl font-bold">Ticket Time Tracker</h1>
       </header>

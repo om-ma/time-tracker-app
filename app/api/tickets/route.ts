@@ -72,10 +72,33 @@ export async function GET(req: NextRequest, res: NextApiResponse<GetTicketsRespo
       const tickets = await ticketsRepo.find(); // Fetch all records without pagination
 
       return NextResponse.json({
-        ticket:tickets, // No pagination metadata needed
+        ticket: tickets, // No pagination metadata needed
       });
     }
-  } catch (error:any) {
+  } catch (error: any) {
+    console.error(error);
+    return ErrorHandler(ErrorMap(error.code));
+  }
+}
+
+export async function getSingleTicket(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
+  try {
+    const params = req.nextUrl?.searchParams;
+    const ticketId = params.get('id');
+
+    if (!ticketId) {
+      return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
+    }
+
+    const ticketRepository = await SqlDb.getRepository(TicketsModel);
+    const ticket = await ticketRepository.findOne({ where: { ticket_id: Number(ticketId) } });
+
+    if (!ticket) {
+      return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
+    }
+
+    return NextResponse.json(ticket);
+  } catch (error: any) {
     console.error(error);
     return ErrorHandler(ErrorMap(error.code));
   }
@@ -87,12 +110,12 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
   console.log('req', req.body)
 
   if (!type || !summary || !detail || !hours) {
-    return  ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
+    return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
     ;
   }
 
   try {
-    const ticketRepository =  await SqlDb.getRepository(TicketsModel);;
+    const ticketRepository = await SqlDb.getRepository(TicketsModel);;
     const ticket = new TicketsModel();
     ticket.type = type;
     ticket.summary = summary;
@@ -151,7 +174,7 @@ export async function DELETE(req: NextRequest, res: NextApiResponse<ErrorRespons
   }
 
   try {
-    const ticketRepository =  await SqlDb.getRepository(TicketsModel);
+    const ticketRepository = await SqlDb.getRepository(TicketsModel);
     const ticket = await ticketRepository.findOne({ where: { ticket_id } });
 
     if (!ticket) {

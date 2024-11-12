@@ -1,7 +1,7 @@
 import { Ticket } from "@/lib/features/tickets/ticketsApiSlice";
 import Link from "next/link";
 
-export const TicketListingItem = ({ticket}:{ticket:Ticket}) => {
+export const TicketListingItem = ({ ticket }: { ticket: Ticket }) => {
   return (
     <tr className="hover:bg-gray-50">
       <td className="py-2 px-4 border-b flex items-center space-x-2">
@@ -9,8 +9,9 @@ export const TicketListingItem = ({ticket}:{ticket:Ticket}) => {
         <span>{ticket.detail}</span>
       </td>
       <td className="py-2 px-4 border-b">
-        {ticket.hours}{' Hours'} 
-        <Link href="/tickets/edit/1">Log Time</Link>
+        {ticket.hours}
+        {" Hours"}
+        <Link href={`/tickets/edit/${ticket.ticket_id}`}>Log Time</Link>
       </td>
     </tr>
   );
