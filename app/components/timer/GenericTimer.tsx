@@ -2,19 +2,23 @@
 import React, { useState, useEffect, useRef } from "react";
 
 interface GenericTimerProps {
+  initialHours?: number;
   initialMinutes?: number;
   initialSeconds?: number;
   tickFunction: (
+    hours: number,
     minutes: number,
     seconds: number
-  ) => { minutes: number; seconds: number };
+  ) => { hours: number; minutes: number; seconds: number };
 }
 
 const GenericTimer: React.FC<GenericTimerProps> = ({
-  initialMinutes = 15,
+  initialHours = 0,
+  initialMinutes = 0,
   initialSeconds = 0,
   tickFunction,
 }) => {
+  const [hours, setHours] = useState(initialHours);
   const [minutes, setMinutes] = useState(initialMinutes);
   const [seconds, setSeconds] = useState(initialSeconds);
   const [isActive, setIsActive] = useState(false);
@@ -23,15 +27,17 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
   useEffect(() => {
     if (isActive) {
       timerRef.current = setInterval(() => {
-        const { minutes: newMinutes, seconds: newSeconds } = tickFunction(
-          minutes,
-          seconds
-        );
+        const {
+          hours: newHours,
+          minutes: newMinutes,
+          seconds: newSeconds,
+        } = tickFunction(hours, minutes, seconds);
 
+        setHours(newHours);
         setMinutes(newMinutes);
         setSeconds(newSeconds);
 
-        if (newMinutes === 0 && newSeconds === 0) {
+        if (newHours === 0 && newMinutes === 0 && newSeconds === 0) {
           setIsActive(false);
           clearInterval(timerRef.current!);
         }
@@ -50,6 +56,7 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
 
   const resetTimer = () => {
     stopTimer();
+    setHours(initialHours);
     setMinutes(initialMinutes);
     setSeconds(initialSeconds);
   };
@@ -57,6 +64,15 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
   return (
     <div style={{ textAlign: "center", fontSize: "24px" }}>
       <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
+        <div
+          style={{
+            border: "1px solid #ddd",
+            padding: "10px",
+            minWidth: "50px",
+          }}
+        >
+          {String(hours).padStart(2, "0")}
+        </div>
         <div
           style={{
             border: "1px solid #ddd",

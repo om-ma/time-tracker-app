@@ -1,12 +1,21 @@
-'use client';
-import { Ticket, useCreateTicketMutation } from "@/lib/features/tickets/ticketsApiSlice";
+"use client";
+import {
+  Ticket,
+  useCreateTicketMutation,
+} from "@/lib/features/tickets/ticketsApiSlice";
+type CreateTicketFormProps = {
+  onCancelRoute: string;
+};
 
+import { useRouter } from "next/navigation";
 
-export const CreateTicketForm = () => {
-  const [createTicket, { isLoading, isError, isSuccess }] = useCreateTicketMutation();
+export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
+  const router = useRouter();
+  const [createTicket, { isLoading, isError, isSuccess }] =
+    useCreateTicketMutation();
 
   // Submit handler function
-  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission behavior (page reload)
     const form = e.target as HTMLFormElement; // The form element is passed as the target
 
@@ -20,8 +29,11 @@ export const CreateTicketForm = () => {
 
     await createTicket(formValues).unwrap(); // .unwrap() helps to handle success or error
 
-
     console.log("Form submitted with values:", formValues); // Log the form data
+  };
+
+  const onCancelHandler = () => {
+    router.push(onCancelRoute);
   };
 
   return (
@@ -86,6 +98,7 @@ export const CreateTicketForm = () => {
             Save Ticket
           </button>
           <button
+            onClick={onCancelHandler}
             type="button" // This is a regular button that doesn't trigger form submission
             className="w-full py-2.5 bg-white text-blue-500 font-semibold border border-blue-500 rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >

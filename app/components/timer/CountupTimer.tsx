@@ -1,10 +1,12 @@
 import GenericTimer from "./GenericTimer";
 
-const countupTick = (minutes: number, seconds: number) => {
+const countupTick = (hours: number, minutes: number, seconds: number) => {
   if (seconds < 59) {
-    return { minutes, seconds: seconds + 1 };
+    return { hours, minutes, seconds: seconds + 1 };
+  } else if (minutes < 59) {
+    return { hours, minutes: minutes + 1, seconds: 0 };
   } else {
-    return { minutes: minutes + 1, seconds: 0 };
+    return { hours: hours + 1, minutes: 0, seconds: 0 };
   }
 };
 
