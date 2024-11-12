@@ -34,7 +34,7 @@
 5. **Visit the Application**:
    - Open your browser and navigate to:
      ```
-     http://localhost:3000/tickets/edit/1
+     http://localhost:3000
      ```
 
 ## Code Planning and Structure
