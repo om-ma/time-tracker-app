@@ -61,6 +61,21 @@ export const Timer = ({ ticketId, onCancelRoute }: TimerProps) => {
       formValues[key] = value.toString();
     });
 
+    if (!formValues.hours) {
+      const savedTime = localStorage.getItem("timer");
+      if (savedTime) {
+        const { hours, minutes, seconds } = JSON.parse(savedTime);
+    
+        if (counterType === TimerMode.CountUp) {
+          formValues.hours = hours + minutes / 60 + seconds / 3600;
+        } else if (counterType === TimerMode.Countdown) {
+          const targetHours = 15;
+          const totalTimeInHours = hours + minutes / 60 + seconds / 3600;
+          formValues.hours = Math.max(0, targetHours - totalTimeInHours);
+        }
+      }
+    }    
+
     await updateTicket(formValues).unwrap();
   };
 
