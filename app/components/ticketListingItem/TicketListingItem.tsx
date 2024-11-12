@@ -1,5 +1,6 @@
 import { Ticket } from "@/lib/features/tickets/ticketsApiSlice";
 import Link from "next/link";
+import { TimeLogged } from "./TimeLogged";
 
 export const TicketListingItem = ({ ticket }: { ticket: any }) => {
   return (
@@ -14,16 +15,7 @@ export const TicketListingItem = ({ ticket }: { ticket: any }) => {
         </div>
       </td>
       <td className="py-[11px] pl-[19.72px] border-s">
-        <span className="font-normal">
-          {ticket.hours}
-          {" Hours"}
-          <Link
-            className="underline pl-3 skip-link"
-            href={`/tickets/edit/${ticket.ticket_id}`}
-          >
-            Log Time
-          </Link>
-        </span>
+        <TimeLogged ticket={ticket}/>
       </td>
     </tr>
   );
