@@ -62,54 +62,33 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
   };
 
   return (
-    <div style={{ textAlign: "center", fontSize: "24px" }}>
-      <div style={{ display: "flex", justifyContent: "center", gap: "10px" }}>
-        <div
-          style={{
-            border: "1px solid #ddd",
-            padding: "10px",
-            minWidth: "50px",
-          }}
+    <div className="border-b pb-[37px]">
+      <div className="flex items-center justify-center gap-3">
+        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]"
         >
           {String(hours).padStart(2, "0")}
         </div>
         <div>:</div>
-        <div
-          style={{
-            border: "1px solid #ddd",
-            padding: "10px",
-            minWidth: "50px",
-          }}
+        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]"
         >
           {String(minutes).padStart(2, "0")}
         </div>
         <div>:</div>
-        <div
-          style={{
-            border: "1px solid #ddd",
-            padding: "10px",
-            minWidth: "50px",
-          }}
+        <div className="text-[44px] dm-mono flex items-center justify-center border border-[#ddd] p-[16px] min-w-[77px] h-[90px] rounded-[4px]"
         >
           {String(seconds).padStart(2, "0")}
         </div>
       </div>
-      <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          justifyContent: "center",
-          gap: "10px",
-        }}
+      <div className="flex justify-center items-center gap-14 mt-[40px]"
       >
-        <button onClick={resetTimer}>Reset</button>
+        <button onClick={resetTimer} className="text-lg dm-mono underline text_light-black">Reset</button>
         <button
           onClick={startTimer}
-          style={{ backgroundColor: "green", color: "white" }}
+          className="bg-[#1E8826] py-4 px-12 rounded-[4px] text-white text-lg dm-mono"
         >
           Start
         </button>
-        <button onClick={stopTimer}>Stop</button>
+        <button onClick={stopTimer} className="text-lg dm-mono underline text_light-black">Stop</button>
       </div>
     </div>
   );

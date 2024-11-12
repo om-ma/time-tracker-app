@@ -12,6 +12,10 @@ body {
 .dm-mono {
   font-family: "DM Mono", monospace;
 }
+.text_light-black {
+  color: #000;
+  opacity: 40%;
+}
 .dm-mono-light {
   font-family: "DM Mono", monospace;
   font-weight: 300;

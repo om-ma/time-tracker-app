@@ -74,31 +74,31 @@ export const Timer = ({ ticketId, onCancelRoute }: TimerProps) => {
     }
   }, [data]);
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div className="flex items-center mb-4">
-        <span className="w-4 h-4 bg-green-500 rounded-full mr-2"></span>
+    <div className="pw-full lg:w-[454px] mx-auto mb-12 bg-white rounded-[10px] border">
+      <div className="flex gap-4 items-center mb-4 border-b py-3  pl-7">
+        <span className="size-[21.51px] bg-[#1E8826] rounded relative">
+        <span className="absolute top-[30%] right-[30%] size-[9px] rounded-full bg-white"></span></span>
         <h2 className="text-lg font-semibold">{data?.detail}</h2>
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="mb-6">
-          <h3 className="text-sm font-semibold mb-2">Log time manually</h3>
+        <div className="px-7 py-8 mb-6">
+          <h3 className="text-lg dm-mono mb-4">Log time manually</h3>
           <input
             type="number"
             step="0.01"
             name="hours"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 text-dark border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="0.00"
             value={hours}
             onChange={(e) => setHours(e.target.value)}
           />
         </div>
-
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-sm font-semibold">Track with Timer</h3>
+        <div className="px-7">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg dm-mono">Track with Timer</h3>
             <a
               href="#"
-              className="text-blue-500 text-sm underline"
+              className="text-blue-700 text-sm dm-mono underline"
               onClick={toggleTimer}
             >
               {counterType === TimerMode.Countdown
@@ -113,33 +113,34 @@ export const Timer = ({ ticketId, onCancelRoute }: TimerProps) => {
           )}
         </div>
 
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Notes
+        <div className="px-[34px] mt-4 mb-4">
+          <label>
+            <div className="mt-3 relative">
+              <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Notes</span>
+              <textarea
+                name="notes"
+                className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                rows={4}
+                placeholder=""
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              ></textarea>
+            </div>
           </label>
-          <textarea
-            name="notes"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            rows={4}
-            placeholder="Notes"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-          ></textarea>
-        </div>
-
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mt-4">
           <button
             onClick={onCancelHandler}
-            className="w-full py-2 bg-white border border-blue-500 text-blue-500 font-semibold rounded-md hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full dm-mono py-[14px] bg-transparent text-[#2EA8C3] border border-[#2EA8C3] rounded-[4px]"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full dm-mono py-[14px] bg-[#2EA8C3] text-dark rounded-[4px]"
           >
             Save
           </button>
+        </div>
         </div>
       </form>
     </div>
