@@ -6,6 +6,7 @@ import {
 type CreateTicketFormProps = {
   onCancelRoute: string;
 };
+import Dropdown from "../dropdow/Dropdown";
 
 import { useRouter } from "next/navigation";
 
@@ -37,19 +38,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
     <div className="py-[39px] w-full lg:w-[454px] mx-auto px-[55px] mb-12 lg:mb-0 bg-white rounded-[10px] border">
       <h2 className="dm-mono text-xl font-medium mb-3">Create new ticket</h2>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <label className="block">
-          <div className="mt-4 relative">
-          <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Ticket type</span>
-            <select
-              name="type" // Make sure to give the select a name
-              className="w-full p-2.5 dm-mono bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="Story">Story</option>
-              <option value="Bug">Bug</option>
-              <option value="Feature">Feature</option>
-            </select>
-          </div>
-        </label>
+        <Dropdown />
 
         {/* Summary */}
         <label className="block">

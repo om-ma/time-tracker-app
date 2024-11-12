@@ -16,6 +16,9 @@ body {
   color: #000;
   opacity: 40%;
 }
+.z-index {
+  z-index: 9999;
+}
 .dm-mono-light {
   font-family: "DM Mono", monospace;
   font-weight: 300;
