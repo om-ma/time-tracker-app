@@ -39,7 +39,7 @@ export const ticketApiSlice = createApi({
     // POST: Create a new ticket
     createTicket: build.mutation<Ticket, Omit<Ticket, "ticket_id">>({
       query: (newTicket) => ({
-        url: "",
+        url: "tickets",
         method: "POST",
         body: newTicket,  // Send the ticket data (without ticket_id)
       }),
@@ -51,8 +51,8 @@ export const ticketApiSlice = createApi({
     // PUT: Update an existing ticket
     updateTicket: build.mutation<Ticket, Ticket>({
       query: (updatedTicket) => ({
-        url: `/${updatedTicket.ticket_id}`,  // URL with ticket_id for the specific ticket
-        method: "PUT",
+        url: `tickets?ticket_id=${updatedTicket.ticket_id}`,  // URL with ticket_id for the specific ticket
+        method: "PATCH",
         body: updatedTicket,  // Send the entire ticket object to update
       }),
       // Invalidate the cache to refetch the ticket list
