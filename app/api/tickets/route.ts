@@ -81,29 +81,6 @@ export async function GET(req: NextRequest, res: NextApiResponse<GetTicketsRespo
   }
 }
 
-export async function getSingleTicket(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
-  try {
-    const params = req.nextUrl?.searchParams;
-    const ticketId = params.get('id');
-
-    if (!ticketId) {
-      return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
-    }
-
-    const ticketRepository = await SqlDb.getRepository(TicketsModel);
-    const ticket = await ticketRepository.findOne({ where: { ticket_id: Number(ticketId) } });
-
-    if (!ticket) {
-      return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
-    }
-
-    return NextResponse.json(ticket);
-  } catch (error: any) {
-    console.error(error);
-    return ErrorHandler(ErrorMap(error.code));
-  }
-}
-
 // Create Ticket (POST)
 export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
   const { type, summary, detail, hours, timer, notes }: TicketsModel = await req.json();
@@ -134,7 +111,7 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
 
 // Update Ticket (PATCH)
 export async function PATCH(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
-  const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<Ticket> = await req.json();
+  const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<TicketsModel> = await req.json();
 
   const ticketRepository = await SqlDb.getRepository(TicketsModel);
 
@@ -147,7 +124,6 @@ export async function PATCH(req: NextRequest, res: NextApiResponse<TicketsModel 
 
     if (!ticket) {
       throw ErrorMap(ErrorEnum.CUSTOM_ERROR);
-
     }
 
     if (type) ticket.type = type;

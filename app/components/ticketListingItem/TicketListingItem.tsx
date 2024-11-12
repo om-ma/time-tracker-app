@@ -6,7 +6,9 @@ export const TicketListingItem = ({ ticket }: { ticket: Ticket }) => {
     <tr className="hover:bg-gray-50">
       <td className="py-2 px-4 border-b flex items-center space-x-2">
         <span className="w-4 h-4 bg-green-500 rounded-full"></span>
-        <span>{ticket.detail}</span>
+        <span>
+          {ticket.detail} = {ticket.notes}
+        </span>
       </td>
       <td className="py-2 px-4 border-b">
         {ticket.hours}

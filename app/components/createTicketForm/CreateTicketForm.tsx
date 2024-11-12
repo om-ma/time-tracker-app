@@ -38,7 +38,6 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
       <h2 className="text-lg font-semibold mb-4">Create new ticket</h2>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
-        {/* Ticket Type */}
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Ticket type</span>
           <div className="mt-1 relative">
@@ -53,35 +52,32 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
           </div>
         </label>
 
-        {/* Summary */}
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Summary</span>
           <input
             type="text"
-            name="summary" // Ensure input has a name so it's included in the form data
+            name="summary"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Summary"
           />
         </label>
 
-        {/* Details */}
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Details</span>
           <textarea
-            name="detail" // Ensure textarea has a name
+            name="detail"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             rows={4}
             placeholder="Details"
           ></textarea>
         </label>
 
-        {/* Hours */}
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Hours</span>
           <input
             type="number"
             step="0.01"
-            name="hours" // Ensure input has a name
+            name="hours"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="0.00"
           />
@@ -89,7 +85,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
 
         <div className="flex space-x-2">
           <button
-            type="submit" // This triggers the onSubmit handler
+            type="submit"
             className="w-full py-2.5 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             Save Ticket
