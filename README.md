@@ -41,8 +41,18 @@
 
 This project is structured with performance, maintainability, and cutting-edge practices in mind. Below is an overview of some of the key decisions made during development:
 
+### API Backend
+
+- **TypeORM for Data Access Layer**:
+  - We use [TypeORM](https://typeorm.io/) as our model layer, which allows us to manage data access cleanly and maintain an MVC (Model-View-Controller) architecture. This ensures that data operations are well-organized and separated from business logic, improving code clarity and testability.
+
 - **RTK for API Calls and Caching**:
   - We use [Redux Toolkit (RTK)](https://redux-toolkit.js.org/) to manage API calls and caching, which improves performance by minimizing redundant API calls and provides a consistent state management solution.
+
+- **Error Handling at API Level**:
+  - We implement error handling at the API layer to provide robust and clear error feedback, which improves the user experience and helps catch issues early.
+
+### Frontend Components
 
 - **Timer Component Structure**:
   - The `Timer` functionality is split into smaller, reusable components:
@@ -54,14 +64,16 @@ This project is structured with performance, maintainability, and cutting-edge p
 - **Tailwind CSS for Styling**:
   - We use [Tailwind CSS](https://tailwindcss.com/) for styling to leverage its utility-first approach, ensuring responsive, modern UI components.
 
-- **Error Handling at API Level**:
-  - We implement error handling at the API layer to provide robust and clear error feedback, which improves the user experience and helps catch issues early.
-
 - **Next.js Layout Technique**:
   - Using Next.js's layout technique to share layouts across pages allows us to reuse code efficiently and improve project structure.
 
 - **Small Component Architecture**:
   - The codebase is organized into small, focused components. This makes the code easier to maintain, read, and test, ensuring future scalability.
+
+### Infrastructure
+
+- **Terraform for Infrastructure as Code**:
+  - The project uses [Terraform](https://www.terraform.io/) to manage AWS infrastructure. Terraform enables us to define and provision cloud resources efficiently, improving scalability, maintainability, and deployment consistency.
 
 ## Contributing
 
