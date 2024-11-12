@@ -101,9 +101,8 @@ export async function getSingleTicket(req: NextRequest, res: NextApiResponse<Tic
 // Create Ticket (POST)
 export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
   const { type, summary, detail, hours, timer, notes }: TicketsModel = await req.json();
-  console.log('req', req.body)
 
-  if (!type || !summary || !detail || !hours) {
+  if (!type || !summary || !detail) {
     return ErrorHandler(ErrorMap(ErrorEnum.CUSTOM_ERROR));
     ;
   }

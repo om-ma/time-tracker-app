@@ -1,29 +1,98 @@
-# Redux Toolkit TypeScript Example
+## Getting Started
 
-This example shows how to integrate Next.js with [Redux Toolkit](https://redux-toolkit.js.org).
+### Prerequisites
 
-**Redux Toolkit**(also known as "RTK" for short) provides a standardized way to write Redux logic. It includes utilities that help simplify many common use cases, including [store setup](https://redux-toolkit.js.org/api/configureStore), [creating reducers and writing immutable update logic](https://redux-toolkit.js.org/api/createreducer), and even [creating entire "slices" of state at once](https://redux-toolkit.js.org/api/createslice). This example showcases each of these features in conjunction with Next.js.
+- **PostgreSQL**: Ensure you have PostgreSQL running locally as the application depends on a local PostgreSQL instance.
+- **Node Version Manager (nvm)**: 
+  - If you don’t have `nvm` installed, you can follow this guide to install it: [Install nvm](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/).
+  - Alternatively, if you already have Node.js 21 installed, you can skip this step.
 
-## Deploy Your Own
+### Setup Instructions
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+1. **Install Node.js Version**:
+   - Use Node.js version 21. If it's not already installed, run:
+     ```bash
+     nvm install 21
+     ```
+   - Then set the Node version to 21:
+     ```bash
+     nvm use 21
+     ```
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-redux&project-name=with-redux&repository-name=with-redux)
+2. **Install Dependencies**:
+   - Run:
+     ```bash
+     yarn install
+     ```
 
-## How to Use
+3. **Create Development Database**:
+   - Run:
+     ```bash
+     yarn db:create:dev
+     ```
+   - **Note**: If you encounter the error `/bin/sh: createdb: command not found`, it means that the `createdb` command is not available on your system. In this case, you can create the database manually in PostgreSQL and skip this command.
+     - To manually create the database, open a PostgreSQL shell and run:
+       ```sql
+       CREATE DATABASE time_traker2 OWNER postgres;
+       ```
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+4. **Run the Development Server**:
+   - Start the server:
+     ```bash
+     yarn run dev
+     ```
 
-```bash
-npx create-next-app --example with-redux with-redux-app
-```
+5. **Visit the Application**:
+   - Open your browser and navigate to:
+     ```
+     http://localhost:3000
+     ```
 
-```bash
-yarn create next-app --example with-redux with-redux-app
-```
+## Code Planning and Structure
 
-```bash
-pnpm create next-app --example with-redux with-redux-app
-```
+This project is structured with performance, maintainability, and cutting-edge practices in mind. Below is an overview of some of the key decisions made during development:
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### API Backend
+
+- **TypeORM for Data Access Layer**:
+  - We use [TypeORM](https://typeorm.io/) as our model layer, which allows us to manage data access cleanly and maintain an MVC (Model-View-Controller) architecture. This ensures that data operations are well-organized and separated from business logic, improving code clarity and testability.
+
+- **RTK for API Calls and Caching**:
+  - We use [Redux Toolkit (RTK)](https://redux-toolkit.js.org/) to manage API calls and caching, which improves performance by minimizing redundant API calls and provides a consistent state management solution.
+
+- **Error Handling at API Level**:
+  - We implement error handling at the API layer to provide robust and clear error feedback, which improves the user experience and helps catch issues early.
+
+### Frontend Components
+
+- **Tickets Table with Reusable Rows**:
+  - The tickets table is built with each row as a separate component to promote modularity and ease of maintenance.
+
+- **Hours Formatting Component**:
+  - Hours formatting is managed by a dedicated component, making it easy to reuse across the application wherever time formatting is required.
+
+- **Timer Component Structure**:
+  - The `Timer` functionality is split into smaller, reusable components:
+    - `baseTimer`
+    - `CountUp`
+    - `CountDown`
+  - This modular structure helps avoid duplication and makes it easier to maintain and extend timer functionality.
+
+- **Tailwind CSS for Styling**:
+  - We use [Tailwind CSS](https://tailwindcss.com/) for styling to leverage its utility-first approach, ensuring responsive, modern UI components.
+
+- **Next.js Layout Technique**:
+  - Using Next.js's layout technique to share layouts across pages allows us to reuse code efficiently and improve project structure.
+
+- **Small Component Architecture**:
+  - The codebase is organized into small, focused components. This makes the code easier to maintain, read, and test, ensuring future scalability.
+
+## Contributing
+
+1. **Fork the repository** and create a new branch.
+2. **Make your changes** and ensure all tests pass.
+3. Submit a pull request, and we’ll review it promptly.
+
+## License
+
+This project is licensed under the MIT License.
