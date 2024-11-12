@@ -5,7 +5,7 @@
     "build": "next build",
     "start": "next start",
     "db:setup": "yarn db:create:dev && yarn db:create:test",
-    "db:create:dev": "createdb --owner=postgres next_now_dev",
+    "db:create:dev": "createdb --owner=postgres time_traker2",
     "g:entity": "yarn typeorm:local entity:create",
     "db:create:test": "createdb --owner=postgres next_now_test",
     "typeorm": "typeorm-ts-node-commonjs",

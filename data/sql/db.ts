@@ -9,9 +9,9 @@ export class SqlDb {
         type: 'postgres',
         host: 'localhost',
         port: 5432,
-        // username: SQL_USER,
+        username: 'postgres',
         // password: SQL_PASSWORD,
-        database: 'time_traker',
+        database: 'time_traker2',
         synchronize: true,
         entities: [
             m.TicketsModel,
