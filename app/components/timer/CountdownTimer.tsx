@@ -19,7 +19,8 @@ export const countdownTick = (
 const CountdownTimer = () => {
   return (
     <GenericTimer
-      initialMinutes={15}
+      initialHours={15}
+      initialMinutes={0}
       initialSeconds={0}
       tickFunction={countdownTick}
     />

@@ -73,6 +73,7 @@ const GenericTimer: React.FC<GenericTimerProps> = ({
         >
           {String(hours).padStart(2, "0")}
         </div>
+        <div>:</div>
         <div
           style={{
             border: "1px solid #ddd",
