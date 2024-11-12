@@ -16,13 +16,20 @@ export const TicketListingItem = ({ ticket }: { ticket: any }) => {
       </td>
       <td className="py-[11px] pl-[19.72px] border-s">
         <span className="font-normal">
-           <TimeLogged hours={ticket.hours}/>
-          <Link
-            className="underline pl-3 skip-link"
-            href={`/tickets/edit/${ticket.ticket_id}`}
-          >
-            Log Time
-          </Link>
+          {ticket.hours ? (
+            <TimeLogged hours={ticket.hours} />
+          ) : (
+            "No time logged."
+          )}
+
+          {!ticket.hours && (
+            <Link
+              className="underline pl-3 skip-link"
+              href={`/tickets/edit/${ticket.ticket_id}`}
+            >
+              Log Time
+            </Link>
+          )}
         </span>
       </td>
     </tr>

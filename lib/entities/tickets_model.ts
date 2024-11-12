@@ -14,7 +14,7 @@ export class TicketsModel {
   @Column({ type: 'text' })
   detail: string | null | undefined;
 
-  @Column({ type: 'decimal', precision: 5, scale: 2 })
+  @Column({ type: 'decimal', precision: 5, scale: 2, nullable: true })
   hours: number | null | undefined;
 
   @Column({ type: 'text' })

@@ -22,7 +22,9 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
     const formValues: Ticket | any = {};
 
     formData.forEach((value, key) => {
-      formValues[key] = value.toString();
+      if (value && value.toString().trim() !== "") {
+        formValues[key] = value.toString();
+      }
     });
 
     await createTicket(formValues).unwrap();
@@ -39,7 +41,9 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
       <form className="space-y-4" onSubmit={handleSubmit}>
         <label className="block">
           <div className="mt-4 relative">
-          <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Ticket type</span>
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">
+              Ticket type
+            </span>
             <select
               name="type" // Make sure to give the select a name
               className="w-full p-2.5 dm-mono bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -54,33 +58,39 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
         {/* Summary */}
         <label className="block">
           <div className="mt-3 relative">
-            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Summary</span>
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">
+              Summary
+            </span>
             <input
               type="text"
               name="summary"
               className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder=""
-              />
+            />
           </div>
         </label>
 
         {/* Details */}
         <label className="block">
-        <div className="mt-3 relative">
-          <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Details</span>
-          <textarea
-            name="detail"
-            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            rows={4}
-            placeholder=""
-          ></textarea>
+          <div className="mt-3 relative">
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">
+              Details
+            </span>
+            <textarea
+              name="detail"
+              className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              rows={4}
+              placeholder=""
+            ></textarea>
           </div>
         </label>
 
         {/* Hours */}
         <label className="block">
           <div className="mt-3 relative">
-            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">Hours</span>
+            <span className="text-[14.53px] px-2 dm-mono text-neutral-500 bg-white absolute top-[-10px] left-[10px]">
+              Hours
+            </span>
             <input
               type="number"
               step="0.01"
