@@ -7,7 +7,9 @@ export default function Layout({ children }: { children: any }) {
       </header>
       <div className="px-[82px] flex flex-col lg:flex-row">
         <div className="w-full lg:w-2/3 mt-11">
-          <h2 className="text-xl font-medium dm-mono mb-[27px] text-black">Existing tickets</h2>
+          <h2 className="text-xl font-medium dm-mono mb-[27px] text-black">
+            Existing tickets
+          </h2>
           <div className="overflow-x-auto"></div>
           <TicketListingTable />
         </div>

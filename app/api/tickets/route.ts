@@ -134,7 +134,8 @@ export async function POST(req: NextRequest, res: NextApiResponse<TicketsModel |
 
 // Update Ticket (PATCH)
 export async function PATCH(req: NextRequest, res: NextApiResponse<TicketsModel | ErrorResponse>) {
-  const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<Ticket> = await req.json();
+
+  const { ticket_id, type, summary, detail, hours, timer, notes }: Partial<TicketsModel> = await req.json();
 
   const ticketRepository = await SqlDb.getRepository(TicketsModel);
 
@@ -147,7 +148,6 @@ export async function PATCH(req: NextRequest, res: NextApiResponse<TicketsModel 
 
     if (!ticket) {
       throw ErrorMap(ErrorEnum.CUSTOM_ERROR);
-
     }
 
     if (type) ticket.type = type;

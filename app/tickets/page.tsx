@@ -9,9 +9,12 @@ export default function TicketssPage() {
             Select an existing ticket to log time
           </h2>
           <p className="text-base font-medium text-center dm-mono mt-[15px]">
-            Or{" "} <br />
-            <Link className="text-base font-medium text-center dm-mono underline" href={`/tickets/new`}>
-              Create a new one       
+            Or <br />
+            <Link
+              className="text-base font-medium text-center dm-mono underline"
+              href={`/tickets/new`}
+            >
+              Create a new one
             </Link>
           </p>
 
@@ -22,7 +25,7 @@ export default function TicketssPage() {
               <div className="w-1/2 h-12 bg-gray-300 rounded-md"></div>
               <div className="w-1/2 h-12 bg-gray-300 rounded-md"></div>
             </div>
-          </div>      
+          </div>
         </div>
       </div>
     </>

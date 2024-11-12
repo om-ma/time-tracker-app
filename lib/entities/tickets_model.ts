@@ -21,5 +21,5 @@ export class TicketsModel {
   timer: string | null | undefined;
 
   @Column({ type: 'text', nullable: true })
-  notes: string | null | undefined; // Nullable field (to match the table's schema)
+  notes: string | null | undefined;
 }

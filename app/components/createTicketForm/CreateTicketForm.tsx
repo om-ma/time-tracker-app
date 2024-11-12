@@ -14,22 +14,19 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
   const [createTicket, { isLoading, isError, isSuccess }] =
     useCreateTicketMutation();
 
-  // Submit handler function
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission behavior (page reload)
-    const form = e.target as HTMLFormElement; // The form element is passed as the target
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
 
-    // Log the form values on submit
-    const formData = new FormData(form); // This will capture all form data
+    const formData = new FormData(form);
     const formValues: Ticket | any = {};
 
     formData.forEach((value, key) => {
       formValues[key] = value.toString();
     });
 
-    await createTicket(formValues).unwrap(); // .unwrap() helps to handle success or error
-
-    console.log("Form submitted with values:", formValues); // Log the form data
+    await createTicket(formValues).unwrap();
+    form.reset();
   };
 
   const onCancelHandler = () => {
@@ -41,7 +38,6 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
       <h2 className="text-lg font-semibold mb-4">Create new ticket</h2>
 
       <form className="space-y-4" onSubmit={handleSubmit}>
-        {/* Ticket Type */}
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Ticket type</span>
           <div className="mt-1 relative">
@@ -61,7 +57,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
           <span className="text-sm font-medium text-gray-700">Summary</span>
           <input
             type="text"
-            name="summary" // Ensure input has a name so it's included in the form data
+            name="summary"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Summary"
           />
@@ -71,7 +67,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
         <label className="block">
           <span className="text-sm font-medium text-gray-700">Details</span>
           <textarea
-            name="detail" // Ensure textarea has a name
+            name="detail"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             rows={4}
             placeholder="Details"
@@ -84,7 +80,7 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
           <input
             type="number"
             step="0.01"
-            name="hours" // Ensure input has a name
+            name="hours"
             className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="0.00"
           />
