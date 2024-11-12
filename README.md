@@ -30,6 +30,11 @@
      ```bash
      yarn db:create:dev
      ```
+   - **Note**: If you encounter the error `/bin/sh: createdb: command not found`, it means that the `createdb` command is not available on your system. In this case, you can create the database manually in PostgreSQL and skip this command.
+     - To manually create the database, open a PostgreSQL shell and run:
+       ```sql
+       CREATE DATABASE time_traker2 OWNER postgres;
+       ```
 
 4. **Run the Development Server**:
    - Start the server:
