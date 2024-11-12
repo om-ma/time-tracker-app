@@ -39,7 +39,7 @@ export const ticketApiSlice = createApi({
     // POST: Create a new ticket
     createTicket: build.mutation<Ticket, Omit<Ticket, "ticket_id">>({
       query: (newTicket) => ({
-        url: "",
+        url: "tickets",
         method: "POST",
         body: newTicket,  // Send the ticket data (without ticket_id)
       }),

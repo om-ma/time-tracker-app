@@ -14,22 +14,19 @@ export const CreateTicketForm = ({ onCancelRoute }: CreateTicketFormProps) => {
   const [createTicket, { isLoading, isError, isSuccess }] =
     useCreateTicketMutation();
 
-  // Submit handler function
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission behavior (page reload)
-    const form = e.target as HTMLFormElement; // The form element is passed as the target
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
 
-    // Log the form values on submit
-    const formData = new FormData(form); // This will capture all form data
+    const formData = new FormData(form);
     const formValues: Ticket | any = {};
 
     formData.forEach((value, key) => {
       formValues[key] = value.toString();
     });
 
-    await createTicket(formValues).unwrap(); // .unwrap() helps to handle success or error
-
-    console.log("Form submitted with values:", formValues); // Log the form data
+    await createTicket(formValues).unwrap();
+    form.reset();
   };
 
   const onCancelHandler = () => {
