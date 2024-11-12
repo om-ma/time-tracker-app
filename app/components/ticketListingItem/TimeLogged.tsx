@@ -1,7 +1,7 @@
 import { Ticket } from "@/lib/features/tickets/ticketsApiSlice";
 import Link from "next/link";
 
-export const TimeLogged = ({ ticket }: { ticket: any }) => {
+export const TimeLogged = ({ hours }: { hours: any }) => {
 
   function convertHoursToReadableFormat(hours: any) {
     const days = Math.floor(hours / 24);
@@ -26,14 +26,6 @@ export const TimeLogged = ({ ticket }: { ticket: any }) => {
   }
 
   return (
-    <span className="font-normal">
-      {convertHoursToReadableFormat(ticket.hours)}
-      <Link
-        className="underline pl-3 skip-link"
-        href={`/tickets/edit/${ticket.ticket_id}`}
-      >
-        Log Time
-      </Link>
-    </span>
+    <span>{convertHoursToReadableFormat(hours)}</span>
   );
 };
