@@ -1,8 +1,11 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind typography;
 
-@import url('./fonts.css');
+ 
 
 html,
 body {

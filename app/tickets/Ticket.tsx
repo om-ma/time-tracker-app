@@ -8,7 +8,7 @@ interface TicketTimeTrackerProps {
 
 const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
   return (
-    <div className=" font-sans min-h-screen">
+    <div className=" font-mono min-h-screen">
      
       
       <div className="bg-white rounded-lg  ">
@@ -17,7 +17,7 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
           <div>Ticket</div>
           <div className=" ">Time Logged</div>
         </div>
-<span className='absolute left-[380px] top-[290px]'>
+<span className='absolute left-[415px] top-[290px]'>
     <svg width="2" height="280" viewBox="0 0 2 226" fill="none" xmlns="http://www.w3.org/2000/svg">
 <line opacity="0.6" x1="1.23338" y1="0.443604" x2="1.23337" y2="285.451" stroke="url(#paint0_linear_3_12)" strokeOpacity="0.6" strokeWidth="0.896445"/>
 <defs>
@@ -41,12 +41,12 @@ const TicketTimeTracker: React.FC<TicketTimeTrackerProps> = ({ tickets }) => {
                  </svg>
                </span>
               <span className="font-medium">{ticket.id}</span>
-              <span className="ml-2 text-gray-600 truncate">{ticket.title}</span>
+              <span className="ml-2 text-black font-normal truncate">{ticket.title}</span>
             </div>
 
             {/* Right Column - Time Logged */}
             <div className="">
-              <span>{ticket.timeLogged}</span>
+              <span className='font-normal '>{ticket.timeLogged}</span>
                
             </div>
           </div>
