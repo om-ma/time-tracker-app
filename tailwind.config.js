@@ -25,7 +25,7 @@ module.exports = {
             position: 'absolute',
             bottom: '0',
             left: '0',
-            width: '90%',
+            width: '80%',
             height: '0.9px',  // Adjust thickness
             background: 'linear-gradient(to right, #00000099, #0000000F)',
           },
