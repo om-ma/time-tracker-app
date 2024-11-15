@@ -12,7 +12,7 @@ const Ticket = () => {
           
           <div >
           <h2 className=' 2xl:text-5xl lg:text-3xl  md:text-xl text-lg font-medium sm:mb-50 mt-6 ml-10 sm:ml-0'>Existing tickets</h2>
-          <div className='pt-12 ml-14 sm:ml-0'>
+          <div className='pt-7 sm:pt-12  ml-14 sm:ml-0'>
           
           <TicketTimeTracker tickets={tickets} />
           </div>
